@@ -1,0 +1,79 @@
+.container {
+  max-width: 1100px;
+  margin: 20px auto 0; /* Adds space below the navbar */
+  background-color: rgba(218, 218, 218, 0.703);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+/* Form Styling */
+.doctor-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Save and Cancel Buttons */
+.save-btn {
+  background-color: cornflowerblue; /* Green */
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: darkcyan;
+  transition: 1s all;
+  color: black;
+}
+
+.cancel-btn {
+  background-color: #dc3545; /* Red */
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #c82333;
+}

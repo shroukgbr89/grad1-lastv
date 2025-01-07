@@ -1,0 +1,119 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f9ff;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f0f9ff;
+  margin-top: 2%;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+header input {
+  flex: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+img {
+  width: 100px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+header .add-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Profile Page */
+.profile {
+  text-align: center;
+}
+
+.profile .profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  margin-top: 7%;
+
+}
+img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover; /* This will maintain aspect ratio and crop excess part */
+  border-radius: 50%;
+}
+
+/* Form Styling */
+.doctor-form {
+display: flex;
+flex-direction: column;
+}
+
+.form-group {
+margin-bottom: 15px;
+}
+
+label {
+font-weight: bold;
+margin-bottom: 5px;
+display: inline-block;
+}
+
+input, textarea {
+width: 100%;
+padding: 10px;
+font-size: 14px;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+
+textarea {
+resize: vertical;
+}
+
+.form-actions {
+display: flex;
+justify-content: flex-end;
+gap: 10px;
+}
+
+.btn {
+padding: 10px 20px;
+border-radius: 4px;
+cursor: pointer;
+border: none;
+font-size: 16px;
+font-weight: bold;
+}
+
+.profile form .save-btn {
+  width: 100px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: #1cbee2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
