@@ -5,9 +5,10 @@ export default function Addnewdoctor() {
   return (
     <>
       <div className="container">
-        <h1>Add New Doctor</h1>
+        
         <form action="/submit-doctor" method="POST" className="doctor-form">
           {/* Doctor's Name */}
+          <h1>Add New Doctor</h1>
           <div className="form-group">
             <label htmlFor="doctor-name">Doctor's Name</label>
             <input
@@ -57,7 +58,7 @@ export default function Addnewdoctor() {
 
           {/* Gender */}
           <div className="form-group">
-            <label htmlFor="gender">Gender</label>
+            <label htmlFor="gender" >Gender &nbsp;</label>
             <select id="gender" name="gender" required>
               <option value="" disabled selected>
                 Select gender

@@ -1,54 +1,46 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f9f9f9;
-}
-
 .container {
   display: flex;
+  flex-direction: row; /* Align the form and image side by side */
   width: 80%;
   max-width: 1200px;
-  background-color: white;
+  background-color: aliceblue;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .container .form-section {
-  width: 50%;
+  width: 50%; /* Each section takes 50% width */
   padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 .container .form-section h1 {
   font-size: 2rem;
   font-weight: 600;
   color: #333;
   margin-bottom: 10px;
 }
+
 .container .form-section p {
   font-size: 1rem;
   margin-bottom: 20px;
   color: #555;
 }
+
 .container .form-section form {
   display: flex;
   flex-direction: column;
 }
+
 .container .form-section form label {
   font-size: 0.9rem;
   margin-bottom: 5px;
   color: #333;
 }
+
 .container .form-section form input {
   padding: 12px;
   margin-bottom: 20px;
@@ -56,6 +48,7 @@ body {
   border-radius: 5px;
   font-size: 1rem;
 }
+
 .container .form-section form button {
   background-color: #5bbcff;
   color: white;
@@ -65,9 +58,11 @@ body {
   font-size: 1rem;
   cursor: pointer;
 }
+
 .container .form-section form button:hover {
   background-color: #48a5e0;
 }
+
 .container .form-section .signup-text {
   margin-top: 20px;
   text-align: center;
@@ -75,26 +70,30 @@ body {
   margin-top: 1%;
   margin-bottom: 1%;
 }
+
 .container .form-section .signup-text a {
   color: #5bbcff;
   text-decoration: none;
   font-weight: 600;
 }
+
 .container .form-section .signup-text a:hover {
   text-decoration: underline;
 }
+
+/* Image Section Styles */
 .container .image-section {
-  width: 50%;
+  width: 50%; /* Each section takes 50% width */
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
+
 .container .image-section img {
-  width: 500px;
-  height: 400px;
+  width: 100%; /* Image takes up the full width of the image section */
+  height: auto; /* Maintain aspect ratio */
   border-radius: 10%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}/*# sourceMappingURL=Login.css.map */
+  object-fit: cover;
+}

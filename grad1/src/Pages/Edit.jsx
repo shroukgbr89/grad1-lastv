@@ -1,11 +1,10 @@
 import React from 'react';
 import doctorImage from '../assets/img/doctor.jpg';
-import '../assets/Edit.css'
+import '../assets/Edit.css';
 
 export default function Edit() {
   return (
     <>
-      <div className="container">
         <div className="profile">
           <img src={doctorImage} alt="Doctor" />
           <form action="Doctorlist.html">
@@ -49,7 +48,6 @@ export default function Edit() {
             <button type="submit" className="save-btn">Save</button>
           </form>
         </div>
-      </div>
     </>
   );
 }

@@ -59,14 +59,12 @@ textarea {
 
 /* Save and Cancel Buttons */
 .save-btn {
-  background-color: cornflowerblue; /* Green */
+  background-color: deepskyblue; /* Green */
   color: white;
 }
 
 .save-btn:hover {
-  background-color: darkcyan;
-  transition: 1s all;
-  color: black;
+  background-color: #218838;
 }
 
 .cancel-btn {
