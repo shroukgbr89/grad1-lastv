@@ -11,6 +11,8 @@ const Signup = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    Specialization: '', // Use Specialization instead of specialist
+    rate: '', // Add rate field
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -31,7 +33,7 @@ const Signup = () => {
     setError('');
     setSuccess('');
 
-    const { fullName, email, password, confirmPassword } = formData;
+    const { fullName, email, password, confirmPassword, Specialization, rate } = formData;
 
     // Validate passwords match and length
     if (password !== confirmPassword) {
@@ -53,6 +55,8 @@ const Signup = () => {
       await setDoc(doc(db, "Doctors", user.uid), {
         fullName: fullName,
         email: email,
+        Specialization: Specialization, // Use Specialization instead of specialist
+        rate: rate, // Save rate
         uid: user.uid,
       });
 
@@ -65,6 +69,8 @@ const Signup = () => {
         email: '',
         password: '',
         confirmPassword: '',
+        Specialization: '', // Clear Specialization
+        rate: '', // Clear rate
       });
     } catch (error) {
       setError(error.message);
@@ -112,14 +118,16 @@ const Signup = () => {
             onChange={handleInputChange}
             required
           />
+          <input
+            type="text"
+            name="Specialization"
+            placeholder="Specialization"
+            value={formData.Specialization}
+            onChange={handleInputChange}
+            required
+          />
           <button type="submit">Sign Up</button>
         </form>
-        <p>
-          Already have an account? <a href="/login">Sign In</a>
-        </p>
-        <p>
-          Return to home <a href="/homepage">Home</a>
-        </p>
       </div>
       <div className="image-container">
         <img src={img1} alt="Doctor Icon" className="doctor-icon" />
