@@ -18,7 +18,13 @@ const Profile = () => {
         const doctorDoc = await getDoc(doctorRef);
 
         if (doctorDoc.exists()) {
-          setDoctor(doctorDoc.data());
+          // Normalize the keys to lowercase
+          const normalizedDoctor = Object.keys(doctorDoc.data()).reduce((acc, key) => {
+            acc[key.toLowerCase()] = doctorDoc.data()[key];
+            return acc;
+          }, {});
+
+          setDoctor(normalizedDoctor);
         } else {
           setError('Doctor not found.');
         }
@@ -45,15 +51,14 @@ const Profile = () => {
     <div className="profile-container">
       {doctor && (
         <>
-          <h1>{doctor.fullName}</h1>
-          <p><strong>Email:</strong> {doctor.email}</p>
-          <p><strong>Specialization:</strong> {doctor.Specialization || 'Not specified'}</p>
+          <h1>{doctor.fullname}</h1>
+          <p><strong>Email:</strong> {doctor.email}</p> {/* No case issues anymore */}
+          <p><strong>Specialization:</strong> {doctor.specialization || 'Not specified'}</p>
           <p><strong>About:</strong> {doctor.about || 'Not specified'}</p>
-          <p><strong>Days Available:</strong> {doctor.Days && Array.isArray(doctor.Days) ? doctor.Days.join(', ') : 'Not specified'}</p>
-          <p><strong>Start Time:</strong> {doctor.Start || 'Not specified'}</p>
-          <p><strong>Duration:</strong> {doctor.Duration || 'Not specified'}</p>
-          <p><strong>Visits:</strong> {doctor.Visits || 'Not specified'}</p>
-          <p><strong>UID:</strong> {doctor.uid || 'Not specified'}</p>
+          <p><strong>Days Available:</strong> {doctor.days && Array.isArray(doctor.days) ? doctor.days.join(', ') : 'Not specified'}</p>
+          <p><strong>Start Time:</strong> {doctor.start || 'Not specified'}</p>
+          <p><strong>Duration:</strong> {doctor.duration || 'Not specified'}</p>
+          <p><strong>Visits:</strong> {doctor.visits || 'Not specified'}</p>
         </>
       )}
     </div>

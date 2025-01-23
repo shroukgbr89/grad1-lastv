@@ -17,8 +17,6 @@ export default function Addnewdoctor() {
     UID: uuidv4() // Generate random UID
   });
 
-  const [errors, setErrors] = useState({}); // State to track errors
-
   const db = getFirestore(app);
 
   // Handle form input changes
@@ -35,41 +33,22 @@ export default function Addnewdoctor() {
   // Handle form submission to add new doctor
   const handleAddDoctor = async (e) => {
     e.preventDefault();
-
-    let validationErrors = {};
-
-    // Validate each field
-    if (!form.fullName) validationErrors.fullName = 'Full Name is required';
-    if (!form.Email) validationErrors.Email = 'Email is required';
-    if (!form.Specialization) validationErrors.Specialization = 'Specialization is required';
-    if (!form.about) validationErrors.about = 'About is required';
-    if (!form.Days.length) validationErrors.Days = 'Days are required';
-    if (!form.Start) validationErrors.Start = 'Start Time is required';
-    if (!form.Duration) validationErrors.Duration = 'Duration is required';
-    if (!form.Visits) validationErrors.Visits = 'Visits are required';
-
-    // If there are validation errors, set them in the errors state
-    if (Object.keys(validationErrors).length) {
-      setErrors(validationErrors);
-    } else {
-      try {
-        await addDoc(collection(db, 'Doctors'), form); // Add document to Firestore
-        alert('Doctor added successfully!');
-        setForm({ // Reset form after successful addition
-          fullName: '',
-          Email: '',
-          Specialization: '',
-          about: '',
-          Days: [], // Reset Days back to empty array
-          Start: '',
-          Duration: '',
-          Visits: '',
-          UID: uuidv4() // Generate new UID
-        });
-        setErrors({}); // Clear errors
-      } catch (error) {
-        console.error('Error adding doctor:', error);
-      }
+    try {
+      await addDoc(collection(db, 'Doctors'), form); // Add document to Firestore
+      alert('Doctor added successfully!');
+      setForm({ // Reset form after successful addition
+        fullName: '',
+        Email: '',
+        Specialization: '',
+        about: '',
+        Days: [], // Reset Days back to empty array
+        Start: '',
+        Duration: '',
+        Visits: '',
+        UID: uuidv4() // Generate new UID
+      });
+    } catch (error) {
+      console.error('Error adding doctor:', error);
     }
   };
 
@@ -86,7 +65,6 @@ export default function Addnewdoctor() {
             onChange={handleInputChange}
             placeholder="Full Name"
           />
-          {errors.fullName && <p className="error">{errors.fullName}</p>}
         </label>
         <label>
           Email:
@@ -97,7 +75,6 @@ export default function Addnewdoctor() {
             onChange={handleInputChange}
             placeholder="Email"
           />
-          {errors.Email && <p className="error">{errors.Email}</p>}
         </label>
         <label>
           Specialization:
@@ -108,7 +85,6 @@ export default function Addnewdoctor() {
             onChange={handleInputChange}
             placeholder="Specialization"
           />
-          {errors.Specialization && <p className="error">{errors.Specialization}</p>}
         </label>
         <label>
           About:
@@ -118,7 +94,6 @@ export default function Addnewdoctor() {
             onChange={handleInputChange}
             placeholder="About"
           />
-          {errors.about && <p className="error">{errors.about}</p>}
         </label>
         <label>
           Days Available (comma separated):
@@ -129,7 +104,6 @@ export default function Addnewdoctor() {
             onChange={handleInputChange}
             placeholder="Days Available (e.g., Monday, Tuesday)"
           />
-          {errors.Days && <p className="error">{errors.Days}</p>}
         </label>
         <label>
           Start Time:
@@ -140,7 +114,6 @@ export default function Addnewdoctor() {
             onChange={handleInputChange}
             placeholder="Start Time"
           />
-          {errors.Start && <p className="error">{errors.Start}</p>}
         </label>
         <label>
           Duration:
@@ -151,7 +124,6 @@ export default function Addnewdoctor() {
             onChange={handleInputChange}
             placeholder="Duration"
           />
-          {errors.Duration && <p className="error">{errors.Duration}</p>}
         </label>
         <label>
           Visits:
@@ -162,7 +134,6 @@ export default function Addnewdoctor() {
             onChange={handleInputChange}
             placeholder="Visits"
           />
-          {errors.Visits && <p className="error">{errors.Visits}</p>}
         </label>
         <button type="submit" style={{ marginTop: '20px', padding: '10px', backgroundColor: '#4CAF50', color: '#fff' }}>
           Add Doctor
