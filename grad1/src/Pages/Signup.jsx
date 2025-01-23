@@ -11,8 +11,6 @@ const Signup = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    Specialization: '', // Use Specialization instead of specialist
-    rate: '', // Add rate field
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -51,10 +49,11 @@ const Signup = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Save user details to Firestore under `/Doctors/`
+      // Save user details to Firestore under /Doctors/
       await setDoc(doc(db, "Doctors", user.uid), {
         fullName: fullName,
         email: email,
+        password: password, // Store password in Firestore (not recommended for production)
         Specialization: Specialization, // Use Specialization instead of specialist
         rate: rate, // Save rate
         uid: user.uid,
@@ -69,8 +68,6 @@ const Signup = () => {
         email: '',
         password: '',
         confirmPassword: '',
-        Specialization: '', // Clear Specialization
-        rate: '', // Clear rate
       });
     } catch (error) {
       setError(error.message);
@@ -115,14 +112,6 @@ const Signup = () => {
             name="confirmPassword"
             placeholder="Confirm Password"
             value={formData.confirmPassword}
-            onChange={handleInputChange}
-            required
-          />
-          <input
-            type="text"
-            name="Specialization"
-            placeholder="Specialization"
-            value={formData.Specialization}
             onChange={handleInputChange}
             required
           />

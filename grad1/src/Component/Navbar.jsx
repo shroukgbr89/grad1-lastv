@@ -27,7 +27,7 @@ export default function Navbar() {
             <div className="dropdown-content">
               <Link to="/Doctorlist" className="dropdown-item">Doctor List View</Link>
               <Link to="/Add" className="dropdown-item">Add New Doctor</Link>
-              <Link to="/Edit" className="dropdown-item">Edit Profile Doctor</Link>
+              {/* <Link to="/Edit" className="dropdown-item">Edit Profile Doctor</Link> */}
             </div>
           </div>
 

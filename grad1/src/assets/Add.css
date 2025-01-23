@@ -1,77 +1,72 @@
-.container {
-  max-width: 1100px;
-  margin: 20px auto 0; /* Adds space below the navbar */
-  background-color: rgba(218, 218, 218, 0.703);
+/* Addnewdoctor.css */
+
+.form-container {
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 h1 {
-  margin-bottom: 20px;
-  font-size: 24px;
   text-align: center;
-  text-decoration: underline;
-}
-
-/* Form Styling */
-.doctor-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group {
-  margin-bottom: 15px;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 label {
-  font-weight: bold;
+  font-weight: 500;
+  color: #555;
   margin-bottom: 5px;
-  display: inline-block;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 textarea {
-  resize: vertical;
+  resize: none;
+  height: 100px;
 }
 
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.btn {
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  border: none;
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #5aace2;
+  color: white;
   font-size: 16px;
-  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* Save and Cancel Buttons */
-.save-btn {
-  background-color: deepskyblue; /* Green */
-  color: white;
+button:hover {
+  background-color: #555;
 }
 
-.save-btn:hover {
-  background-color: #218838;
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
 }
 
-.cancel-btn {
-  background-color: #dc3545; /* Red */
-  color: white;
-}
 
-.cancel-btn:hover {
-  background-color: #c82333;
+@media (max-width: 600px) {
+  .form-container {
+    padding: 15px;
+  }
+
+  input,
+  textarea,
+  button {
+    font-size: 14px;
+  }
 }

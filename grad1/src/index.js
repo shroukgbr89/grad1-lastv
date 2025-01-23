@@ -12,6 +12,7 @@ import Edit from './Pages/Edit';
 import ListAppointment from './Pages/ListAppointment';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup'; 
+import Profile from './Pages/Profile'; // Import the Profile component
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -50,9 +51,18 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: 'Signup',  // Add route for Signup
+        path: 'Signup', // Add route for Signup
         element: <Signup />,
       },
+      {
+        path: 'profile/:doctorId', // Define the profile route
+        element: <Profile />,
+      },
+      {
+        path: 'Edit/:doctorId', // Add :doctorId to make the route dynamic
+        element: <Edit />,
+        errorElement: <div>Oops! Something went wrong. Try again later.</div>,
+      }      
     ],
   },
 ]);

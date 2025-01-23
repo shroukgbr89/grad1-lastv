@@ -1,122 +1,43 @@
-
-/* Header Styling */
-header {
-  display: flex;
-  justify-content: center; /* Align the header to the left */
-  align-items: center; /* Center vertically */
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-header h1 {
-  font-size: 24px;
-  color: #333;
-  margin-right: 10px;
-}
-
-header input {
-  flex: 1;
-  padding: 10px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  
-}
-.form-group input , .form-group textarea{
-  width: 540px;
-}
-header .add-btn {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-
-/* Profile Page */
-.profile {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center horizontally */
-}
-
-.profile .profile-img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin-bottom: 20px;
-  margin-top: 7%;
-}
-
-img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover; /* Maintain aspect ratio and crop excess part */
-  border-radius: 50%;
-  margin-top: 2%;
-}
-
-.doctor-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center horizontally */
-  width: 100%; /* Ensure the form spans the container width */
-}
-
-.form-group {
-  margin-bottom: 15px;
-  width: 100%; /* Ensure consistent alignment */
-  max-width: 500px; /* Limit width for better visual design */
-}
-
-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: inline-block;
-}
-
-input,
-textarea {
-  max-width: 1200px; 
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  align-items: left;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: center; /* Center buttons horizontally */
-  gap: 10px;
-}
-
-.btn {
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  border: none;
-  font-size: 16px;
-  font-weight: bold;
-  
-}
-
-.profile form .save-btn {
-  width: 100px;
+.edit-form {
+  max-width: 600px;
   margin: 0 auto;
-  padding: 10px 20px;
-  background-color: #1cbee2;
-  color: white;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.edit-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 5px;
-  margin-bottom: 5%;
+  border-radius: 4px;
   cursor: pointer;
+}
+
+.edit-form button:hover {
+  background-color: #0056b3;
 }
