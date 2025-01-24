@@ -26,7 +26,7 @@ const LoginPage = () => {
     try {
       // Query Firestore to find the user by email
       const usersCollection = collection(db, 'Doctors'); // Replace 'Doctors' with your Firestore collection name
-      const q = query(usersCollection, where('email', '==', email)); // Ensure 'email' matches the field name in Firestore
+      const q = query(usersCollection, where('Email', '==', email)); // Ensure 'Email' matches the field name in Firestore
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
