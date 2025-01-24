@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { app } from '../config/firebase';
 import { v4 as uuidv4 } from 'uuid'; // Import UUID for generating random UID
-import "../assets/Add.css"
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import "../assets/Add.css";
 
 export default function Addnewdoctor() {
   const [form, setForm] = useState({
@@ -18,6 +19,7 @@ export default function Addnewdoctor() {
   });
 
   const db = getFirestore(app);
+  const navigate = useNavigate(); // Initialize navigate function
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -47,6 +49,7 @@ export default function Addnewdoctor() {
         Visits: '',
         UID: uuidv4() // Generate new UID
       });
+      navigate('/doctorlist'); // Navigate to Doctorlist page
     } catch (error) {
       console.error('Error adding doctor:', error);
     }
@@ -135,7 +138,7 @@ export default function Addnewdoctor() {
             placeholder="Visits"
           />
         </label>
-        <button type="submit" style={{ marginTop: '20px', padding: '10px', backgroundColor: '#4CAF50', color: '#fff' }}>
+        <button type="submit" style={{ marginTop: '20px', padding: '10px', color: '#fff' }}>
           Add Doctor
         </button>
       </form>

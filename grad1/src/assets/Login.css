@@ -97,3 +97,20 @@
   border-radius: 10%;
   object-fit: cover;
 }
+/* Login.css */
+
+/* Message styling */
+.message {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.message.success {
+  color: green;
+}
+
+.message.error {
+  color: red;
+}
+

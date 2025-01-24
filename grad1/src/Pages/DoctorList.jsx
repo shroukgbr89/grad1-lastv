@@ -6,28 +6,44 @@ import { FaEye } from 'react-icons/fa'; // Import the view profile icon
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 export default function Doctorlist() {
-  const [doctors, setDoctors] = useState([]);
+  const [doctors, setDoctors] = useState([]); // State to store all doctors
+  const [searchQuery, setSearchQuery] = useState(''); // State to manage search query
+  const [filteredDoctors, setFilteredDoctors] = useState([]); // State to store filtered doctors
   const navigate = useNavigate(); // Initialize useNavigate
 
   const db = getFirestore(app);
 
-  useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "Doctors"));
-        const doctorsList = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        console.log(doctorsList); // Debugging: Check the fetched data
-        setDoctors(doctorsList);
-      } catch (error) {
-        console.error("Error fetching doctors: ", error);
-      }
-    };
+  // Fetch all doctors from Firestore
+  const fetchDoctors = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "Doctors"));
+      const doctorsList = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setDoctors(doctorsList); // Set all doctors
+      setFilteredDoctors(doctorsList); // Initialize filtered doctors with all doctors
+    } catch (error) {
+      console.error("Error fetching doctors: ", error);
+    }
+  };
 
+  // Fetch doctors on component mount
+  useEffect(() => {
     fetchDoctors();
   }, [db]);
+
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    // Filter doctors locally based on the search query
+    const filtered = doctors.filter(doctor =>
+      doctor.fullName.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredDoctors(filtered);
+  };
 
   // Function to handle view profile
   const handleViewProfile = (doctorId) => {
@@ -39,18 +55,37 @@ export default function Doctorlist() {
     try {
       await deleteDoc(doc(db, "Doctors", doctorId)); // Delete document from Firestore
       setDoctors(doctors.filter(doctor => doctor.id !== doctorId)); // Update local state
+      setFilteredDoctors(filteredDoctors.filter(doctor => doctor.id !== doctorId)); // Update filtered state
       alert('Doctor deleted successfully!');
     } catch (error) {
       console.error("Error deleting doctor: ", error);
     }
   };
 
+  // Function to handle "ALL" button click
+  const handleAllClick = () => {
+    setSearchQuery(''); // Clear the search query
+    fetchDoctors(); // Re-fetch all doctors
+  };
+
   return (
     <>
       <section className="doctor-list">
         <div className="controls">
-          <button className="btn-all">ALL</button>
-          <input type="text" placeholder="Search Doctor Name" />
+          <button
+            className="btn-all"
+            style={{ width: '80px', height: '50px' }}
+            onClick={handleAllClick} // Handle "ALL" button click
+          >
+            ALL
+          </button>
+          <input
+            type="text"
+            style={{ width: '170px', height: '52px', marginRight: "900px", marginTop: "8px" }}
+            placeholder="Search Doctor Name"
+            value={searchQuery}
+            onChange={handleSearchChange} // Handle search input change
+          />
           <button
             className="btn-add"
             onClick={() => navigate('/add')} // Navigate to Add Doctor page
@@ -60,7 +95,7 @@ export default function Doctorlist() {
           </button>
         </div>
         <div className="cards">
-          {doctors.map(doctor => (
+          {filteredDoctors.map(doctor => (
             <div className="card" key={doctor.id}>
               <h2>{doctor.fullName}</h2>
               <h5>{doctor.Specialization || "Not specified"}</h5> {/* Display specialization */}
