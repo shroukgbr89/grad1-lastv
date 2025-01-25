@@ -16,9 +16,9 @@ export default function Navbar() {
           <div className="dropdown">
             <Link to="#" className="dropdown-link">Appointment</Link>
             <div className="dropdown-content">
-              <Link to="/ListAppoinment" className="dropdown-item">List Appointment</Link>
-              <Link to="#" className="dropdown-item">Appointment Status</Link>
-              <Link to="#" className="dropdown-item">Doctor Schedule</Link>
+            <Link to="/ListAppointment" className="dropdown-item">List Appointment</Link>
+            {/* <Link to="#" className="dropdown-item">Appointment Status</Link>
+              <Link to="#" className="dropdown-item">Doctor Schedule</Link> */}
             </div>
           </div>
 
@@ -27,7 +27,7 @@ export default function Navbar() {
             <div className="dropdown-content">
               <Link to="/Doctorlist" className="dropdown-item">Doctor List View</Link>
               <Link to="/Add" className="dropdown-item">Add New Doctor</Link>
-              {/* <Link to="/Edit" className="dropdown-item">Edit Profile Doctor</Link> */}
+              <Link to="/Edit" className="dropdown-item">Edit Profile Doctor</Link>
             </div>
           </div>
 

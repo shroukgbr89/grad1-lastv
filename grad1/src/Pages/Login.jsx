@@ -1,54 +1,54 @@
 import React, { useState } from 'react';
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore'; // Firestore imports
-import { Link } from 'react-router-dom'; // Import Link from React Router
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
+import { Link, useNavigate } from 'react-router-dom';
 import '../assets/Login.css';
-import doctor from "../assets/img/login.webp";
-import { app } from '../config/firebase'; // Firebase configuration
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Eye icons from react-icons
+import doctor from '../assets/img/login.webp';
+import { app } from '../config/firebase';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-const LoginPage = () => {
+const LoginPage = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState({ text: '', type: '' }); // Message with type (success or error)
-  const db = getFirestore(app); // Firestore instance
+  const [message, setMessage] = useState({ text: '', type: '' });
+  const navigate = useNavigate();
 
-  // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
 
-  // Handle login form submission
   const handleLogin = async (e) => {
     e.preventDefault();
-    setMessage({ text: '', type: '' }); // Reset message
+    setMessage({ text: '', type: '' });
 
     try {
-      // Query Firestore to find the user by email
-      const usersCollection = collection(db, 'Doctors'); // Replace 'Doctors' with your Firestore collection name
-      const q = query(usersCollection, where('Email', '==', email)); // Ensure 'Email' matches the field name in Firestore
+      const db = getFirestore(app);
+      const usersCollection = collection(db, 'Doctors');
+      const q = query(usersCollection, where('Email', '==', email));
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
-        // If user exists, check password
-        const userDoc = querySnapshot.docs[0]; // Assuming unique emails
+        const userDoc = querySnapshot.docs[0];
         const userData = userDoc.data();
 
         if (userData.password === password) {
-          setMessage({ text: 'Login successful!', type: 'success' }); // Success message
-          // Redirect to homepage (example: using React Router)
-          setTimeout(() => {
-            window.location.href = '/homepage'; // Replace with your actual route
-          }, 1000);
+          setMessage({ text: 'Login successful!', type: 'success' });
+          onLogin(email, userDoc.id);
+
+          if (email === 'admin@gmail.com') {
+            setTimeout(() => navigate('/homepage'), 1000);
+          } else {
+            setTimeout(() => navigate('/appointments'), 1000);
+          }
         } else {
-          setMessage({ text: 'Invalid password. Please try again.', type: 'error' }); // Error message
+          setMessage({ text: 'Invalid password. Please try again.', type: 'error' });
         }
       } else {
-        setMessage({ text: 'No user found with this email. Please try again.', type: 'error' }); // Error message
+        setMessage({ text: 'No user found with this email.', type: 'error' });
       }
     } catch (error) {
       console.error('Error during login:', error);
-      setMessage({ text: 'An error occurred during login. Please try again later.', type: 'error' }); // Error message
+      setMessage({ text: 'An error occurred during login. Please try again.', type: 'error' });
     }
   };
 
@@ -87,13 +87,15 @@ const LoginPage = () => {
           </div>
 
           {message.text && (
-            <p className={`message ${message.type}`}>{message.text}</p>
+            <p className={message.type === 'success' ? 'success-message' : 'error-message'}>
+              {message.text}
+            </p>
           )}
 
           <button type="submit">Login</button>
         </form>
         <p className="signup-text">
-          Don’t have an account? <Link to="/signup">Sign Up</Link> {/* Use Link */}
+          Don’t have an account? <Link to="/signup">Sign Up</Link>
         </p>
       </div>
 
@@ -105,4 +107,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginPage;

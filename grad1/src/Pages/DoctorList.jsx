@@ -21,12 +21,23 @@ export default function Doctorlist() {
         id: doc.id,
         ...doc.data()
       }));
-      setDoctors(doctorsList); // Set all doctors
-      setFilteredDoctors(doctorsList); // Initialize filtered doctors with all doctors
+  
+      // Filter out the admin user by matching fullName, email, or any other relevant fields
+      const filteredList = doctorsList.filter(doctor => {
+        // Filter based on email or other fields you want to check
+        return doctor.email !== "admin@gmail.com" &&
+               doctor.fullName !== "Admin User" &&
+               doctor.Specialization !== "Monitor" &&
+               doctor.about !== "I am responsible for managing and overseeing all administrative functions, including user registrations, appointment scheduling, and data updates, ensuring seamless operation and efficient healthcare service delivery.";
+      });
+  
+      setDoctors(filteredList); // Set all doctors excluding the admin
+      setFilteredDoctors(filteredList); // Initialize filtered doctors with all doctors except the admin
     } catch (error) {
       console.error("Error fetching doctors: ", error);
     }
   };
+  
 
   // Fetch doctors on component mount
   useEffect(() => {
