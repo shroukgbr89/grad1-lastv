@@ -36,7 +36,7 @@ const Signup = () => {
     const { fullName, Email, password, confirmPassword } = formData;
   
     // Normalize email to lowercase
-    const normalizedEmail = Email;
+    // const normalizedEmail = Email;
   
     // Validate passwords match and length
     if (password !== confirmPassword) {

@@ -36,16 +36,15 @@ export default function Navbar() {
               </div>
             </div>
           )}
+<Link to="/HomePage" className="nav-link">Home</Link>
 
-          <Link to="/HomePage" className="nav-link">Home</Link>
-
-          <div className="auth-buttons">
-            {/* Login and Sign up Links */}
-            <Link to="/signup" className="sign-up-btn">Sign up</Link>
-            <Link to="/Login" className="login-btn">Login</Link> {/* Login link */}
-          </div>
-        </div>
-      </nav>
-    </>
-  );
+<div className="auth-buttons">
+  {/* Login and Sign up Links */}
+  <Link to="/signup" className="sign-up-btn">Sign up</Link>
+  <Link to="/Login" className="login-btn">Login</Link> {/* Login link */}
+</div>
+</div>
+</nav>
+    </>
+  );
 }

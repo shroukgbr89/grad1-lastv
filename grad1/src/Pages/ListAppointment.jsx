@@ -3,24 +3,27 @@ import { collection, query, where, getDocs, getFirestore } from 'firebase/firest
 import { app } from '../config/firebase';
 import '../assets/ListAppointment.css';
 
-const ListAppointment = ({ doctorEmail, doctorId, userEmail, userPassword }) => {
+const ListAppointment = ({ doctorEmail, doctorId }) => {
   const [appointments, setAppointments] = useState([]);
   const [doctorDetails, setDoctorDetails] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
+    // Retrieve the user data from localStorage
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    setLoggedInUser(userData);
+
     const fetchAppointments = async () => {
       const db = getFirestore(app);
       const appointmentsRef = collection(db, 'Reservations');
 
       try {
         let q;
-
-        // Check if admin is logged in
-        if (userEmail === 'admin@gmail.com' && userPassword === 'adminuser123') {
-          // Fetch all appointments if logged in as admin
+        if (userData?.admin) {
+          // Fetch all appointments for admin
           q = query(appointmentsRef);
-          console.log('Fetching all appointments for admin...');
+          console.log('Admin logged in: Fetching all appointments...');
         } else if (doctorEmail && doctorId) {
           // Fetch appointments for the specific doctor
           q = query(
@@ -40,7 +43,7 @@ const ListAppointment = ({ doctorEmail, doctorId, userEmail, userPassword }) => 
           ...doc.data(),
         }));
 
-        console.log('Fetched appointments:', fetchedAppointments); // Debugging
+        console.log('Fetched appointments:', fetchedAppointments);
         setAppointments(fetchedAppointments);
 
         // If fetching for a specific doctor, extract their details
@@ -59,21 +62,27 @@ const ListAppointment = ({ doctorEmail, doctorId, userEmail, userPassword }) => 
     };
 
     fetchAppointments();
-  }, [doctorEmail, doctorId, userEmail, userPassword]);
+  }, [doctorEmail, doctorId]);
 
   if (loading) {
     return <p>Loading appointments...</p>;
   }
 
-  // Only show "No appointments found" if not an admin and no appointments are found
-  if (appointments.length === 0 && !(userEmail === 'admin@gmail.com' && userPassword === 'adminuser123')) {
+  if (appointments.length === 0 && !loggedInUser?.admin) {
     return <h2 style={{ color: 'red' }}>No appointments found for this user.</h2>;
   }
 
   return (
     <div className="appointments-container">
       <h2>Appointments</h2>
-      {userEmail !== 'admin@gmail.com' && (
+      {loggedInUser?.admin ? (
+        // Admin View
+        <div className="doctor-details">
+          <p><strong>Name:</strong> Admin</p>
+          <p><strong>Specialization:</strong> Monitor</p>
+        </div>
+      ) : (
+        // Doctor View
         <div className="doctor-details">
           <p><strong>Doctor Name:</strong> {doctorDetails?.doctorName || 'N/A'}</p>
           <p><strong>Specialization:</strong> {doctorDetails?.specialization || 'N/A'}</p>
@@ -86,7 +95,7 @@ const ListAppointment = ({ doctorEmail, doctorId, userEmail, userPassword }) => 
             <th>Time</th>
             <th>Day</th>
             <th>Patient Phone</th>
-            <th>Doctor Name</th> {/* Added for admin view */}
+            <th>Doctor Name</th>
           </tr>
         </thead>
         <tbody>
@@ -96,7 +105,7 @@ const ListAppointment = ({ doctorEmail, doctorId, userEmail, userPassword }) => 
               <td>{appointment.time}</td>
               <td>{appointment.day}</td>
               <td>{appointment.patientPhone}</td>
-              <td>{appointment.doctorName || 'N/A'}</td> {/* Display doctor name */}
+              <td>{appointment.doctorName || 'N/A'}</td>
             </tr>
           ))}
         </tbody>

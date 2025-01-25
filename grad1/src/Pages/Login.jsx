@@ -33,12 +33,15 @@ const LoginPage = ({ onLogin }) => {
   
         if (userData.password === password) {
           setMessage({ text: 'Login successful!', type: 'success' });
+  
+          // Mark admin flag if user is admin
+          const isAdmin = email === 'admin@gmail.com' && password === 'adminuser123';
+          const userWithAdminFlag = { ...userData, admin: isAdmin };
+  
+          localStorage.setItem('userData', JSON.stringify(userWithAdminFlag)); // Store user data
           onLogin(email, userDoc.id);
   
-          // Store user data in localStorage
-          localStorage.setItem('userData', JSON.stringify(userData)); // Store entire user data
-  
-          if (email === 'admin@gmail.com') {
+          if (isAdmin) {
             setTimeout(() => navigate('/homepage'), 1000);
           } else {
             setTimeout(() => navigate('/appointments'), 1000);
@@ -51,9 +54,9 @@ const LoginPage = ({ onLogin }) => {
       }
     } catch (error) {
       console.error('Error during login:', error);
-      setMessage({ text: 'An error occurred during login. Please try again.', type: 'error' });
-    }
-  };  
+      setMessage({ text: 'An error occurred during login. Please try again.', type: 'error' });
+    }
+  };
 
   return (
     <div className="container">
