@@ -90,8 +90,9 @@ function MainRouter() {
           element: <Signup />,
         },
         {
-          path: 'profile/:doctorId', // Define the profile route
-          element: <Profile />,
+            path: 'profile/:doctorId',
+            element: <Profile />,
+          
         },
         {
           path: 'Edit/:doctorId', // Add :doctorId to make the route dynamic

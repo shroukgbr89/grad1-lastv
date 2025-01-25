@@ -145,7 +145,7 @@ export default function Edit() {
             placeholder="Visits"
           />
         </label>
-        <button type="submit" style={{ marginTop: '20px', padding: '10px', backgroundColor: '#4CAF50', color: '#fff' }}>
+        <button type="submit" style={{ marginTop: '20px', padding: '10px', backgroundColor: '#357ab7', color: '#fff' }}>
           Save Changes
         </button>
       </form>

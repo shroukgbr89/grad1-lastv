@@ -4,8 +4,10 @@ import m1 from '../assets/img/m1.jpg';
 import '../assets/HomePage.css';
 
 export default function Navbar() {
-  // Get the logged-in user's admin status from localStorage
-  const isAdmin = JSON.parse(localStorage.getItem('userData'))?.admin;
+  // Retrieve logged-in user data
+  const userData = JSON.parse(localStorage.getItem('userData')) || {};
+  const isAdmin = userData?.admin; // Check if the user is an admin
+  const doctorId = localStorage.getItem('doctorId'); // Check if the user is a doctor
 
   return (
     <>
@@ -15,13 +17,10 @@ export default function Navbar() {
           <span className="brand-name">Health Care</span>
         </div>
         <div className="nav-links">
-          {/* <Link to="#" className="nav-link">Reports</Link> */}
           <div className="dropdown">
             <Link to="#" className="dropdown-link">Appointment</Link>
             <div className="dropdown-content">
               <Link to="/ListAppointment" className="dropdown-item">List Appointment</Link>
-              {/* <Link to="#" className="dropdown-item">Appointment Status</Link>
-              <Link to="#" className="dropdown-item">Doctor Schedule</Link> */}
             </div>
           </div>
 
@@ -30,21 +29,26 @@ export default function Navbar() {
             <div className="dropdown">
               <Link to="#" className="dropdown-link">Doctors</Link>
               <div className="dropdown-content">
-                <Link to="/Doctorlist" className="dropdown-item">Doctor List View</Link>
+                <Link to="/DoctorList" className="dropdown-item">Doctor List View</Link>
                 <Link to="/Add" className="dropdown-item">Add New Doctor</Link>
                 <Link to="/Edit" className="dropdown-item">Edit Profile Doctor</Link>
               </div>
             </div>
           )}
-<Link to="/HomePage" className="nav-link">Home</Link>
 
-<div className="auth-buttons">
-  {/* Login and Sign up Links */}
-  <Link to="/signup" className="sign-up-btn">Sign up</Link>
-  <Link to="/Login" className="login-btn">Login</Link> {/* Login link */}
-</div>
-</div>
-</nav>
-    </>
-  );
+          {/* Render the Profile link if doctorId exists */}
+          {doctorId && (
+            <Link to={`/profile/${doctorId}`} className="nav-link" style={{ marginLeft: '8px' }}>My Profile</Link>
+          )}
+
+          <Link to="/HomePage" className="nav-link">Home</Link>
+
+          <div className="auth-buttons">
+            <Link to="/signup" className="sign-up-btn">Sign up</Link>
+            <Link to="/Login" className="login-btn">Login</Link>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
 }

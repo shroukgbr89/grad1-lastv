@@ -50,7 +50,7 @@
 }
 
 .container .form-section form button {
-  background-color: #5bbcff;
+  background-color: #357ab7;
   color: white;
   padding: 12px;
   border: none;
@@ -60,7 +60,7 @@
 }
 
 .container .form-section form button:hover {
-  background-color: #48a5e0;
+  background-color: #357ab7;
 }
 
 .container .form-section .signup-text {
@@ -72,7 +72,7 @@
 }
 
 .container .form-section .signup-text a {
-  color: #5bbcff;
+  color: #357ab7;
   text-decoration: none;
   font-weight: 600;
 }

@@ -52,13 +52,19 @@ const Profile = () => {
       {doctor && (
         <>
           <h1>{doctor.fullname}</h1>
-          <p><strong>Email:</strong> {doctor.email}</p> {/* No case issues anymore */}
+          <p><strong>Email:</strong> {doctor.email}</p>
           <p><strong>Specialization:</strong> {doctor.specialization || 'Not specified'}</p>
           <p><strong>About:</strong> {doctor.about || 'Not specified'}</p>
-          <p><strong>Days Available:</strong> {doctor.days && Array.isArray(doctor.days) ? doctor.days.join(', ') : 'Not specified'}</p>
-          <p><strong>Start Time:</strong> {doctor.start || 'Not specified'}</p>
-          <p><strong>Duration:</strong> {doctor.duration || 'Not specified'}</p>
-          <p><strong>Visits:</strong> {doctor.visits || 'Not specified'}</p>
+
+          {/* Show additional fields only if the user is not an admin */}
+          {!doctor.admin && (
+            <>
+              <p><strong>Days Available:</strong> {doctor.days && Array.isArray(doctor.days) ? doctor.days.join(', ') : 'Not specified'}</p>
+              <p><strong>Start Time:</strong> {doctor.start || 'Not specified'}</p>
+              <p><strong>Duration:</strong> {doctor.duration || 'Not specified'}</p>
+              <p><strong>Visits:</strong> {doctor.visits || 'Not specified'}</p>
+            </>
+          )}
         </>
       )}
     </div>

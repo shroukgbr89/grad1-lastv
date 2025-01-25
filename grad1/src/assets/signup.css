@@ -76,21 +76,25 @@ button:hover {
 }
 
 .image-container {
-  width: 45%;
+  width: 50%;
 }
 
 .doctor-icon {
   width: 105%;
   height: 75vh;
   display: block;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
   margin: 0 auto;
-  border-radius: 50%;
 }
 
 .doctor-icon:hover {
   transition: 1s all;
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(1.02);
 }
 
 .form-container p {

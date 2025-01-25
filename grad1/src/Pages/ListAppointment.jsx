@@ -74,7 +74,7 @@ const ListAppointment = ({ doctorEmail, doctorId }) => {
 
   return (
     <div className="appointments-container">
-      <h2>Appointments</h2>
+      <h2>My Appointments</h2>
       {loggedInUser?.admin ? (
         // Admin View
         <div className="doctor-details">
