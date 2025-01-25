@@ -72,11 +72,7 @@ function MainRouter() {
         {
           path: 'Edit',
           element: <Edit />,
-        },
-        // {
-        //   path: 'appointments',
-        //   element: <ListAppointment doctorEmail={doctorEmail} doctorId={doctorId} />,
-        // },       
+        },      
         {
           path: 'ListAppointment',
           element: <ListAppointment doctorEmail={doctorEmail} doctorId={doctorId} />,

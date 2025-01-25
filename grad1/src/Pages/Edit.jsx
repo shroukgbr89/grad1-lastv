@@ -34,7 +34,19 @@ export default function Edit() {
   // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+
+    // For the Days field, convert string input into an array
+    if (name === 'Days') {
+      setForm({
+        ...form,
+        [name]: value.split(',').map((day) => day.trim()), // Split and trim the input string into an array
+      });
+    } else {
+      setForm({
+        ...form,
+        [name]: value,
+      });
+    }
   };
 
   // Handle form submission and save changes
@@ -98,9 +110,9 @@ export default function Edit() {
           <input
             type="text"
             name="Days"
-            value={form.Days || ''}
+            value={Array.isArray(form.Days) ? form.Days.join(', ') : ''} // Check if Days is an array before calling join
             onChange={handleInputChange}
-            placeholder="Days Available"
+            placeholder="Days Available (e.g., Monday, Tuesday)"
           />
         </label>
         <label>

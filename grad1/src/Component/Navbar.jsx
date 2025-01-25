@@ -4,6 +4,9 @@ import m1 from '../assets/img/m1.jpg';
 import '../assets/HomePage.css';
 
 export default function Navbar() {
+  // Get the logged-in user's admin status from localStorage
+  const isAdmin = JSON.parse(localStorage.getItem('userData'))?.admin;
+
   return (
     <>
       <nav className="navbar">
@@ -16,20 +19,23 @@ export default function Navbar() {
           <div className="dropdown">
             <Link to="#" className="dropdown-link">Appointment</Link>
             <div className="dropdown-content">
-            <Link to="/ListAppointment" className="dropdown-item">List Appointment</Link>
-            {/* <Link to="#" className="dropdown-item">Appointment Status</Link>
+              <Link to="/ListAppointment" className="dropdown-item">List Appointment</Link>
+              {/* <Link to="#" className="dropdown-item">Appointment Status</Link>
               <Link to="#" className="dropdown-item">Doctor Schedule</Link> */}
             </div>
           </div>
 
-          <div className="dropdown">
-            <Link to="#" className="dropdown-link">Doctors</Link>
-            <div className="dropdown-content">
-              <Link to="/Doctorlist" className="dropdown-item">Doctor List View</Link>
-              <Link to="/Add" className="dropdown-item">Add New Doctor</Link>
-              <Link to="/Edit" className="dropdown-item">Edit Profile Doctor</Link>
+          {/* Conditionally render the "Doctors" dropdown based on admin status */}
+          {isAdmin && (
+            <div className="dropdown">
+              <Link to="#" className="dropdown-link">Doctors</Link>
+              <div className="dropdown-content">
+                <Link to="/Doctorlist" className="dropdown-item">Doctor List View</Link>
+                <Link to="/Add" className="dropdown-item">Add New Doctor</Link>
+                <Link to="/Edit" className="dropdown-item">Edit Profile Doctor</Link>
+              </div>
             </div>
-          </div>
+          )}
 
           <Link to="/HomePage" className="nav-link">Home</Link>
 

@@ -20,21 +20,24 @@ const LoginPage = ({ onLogin }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setMessage({ text: '', type: '' });
-
+  
     try {
       const db = getFirestore(app);
       const usersCollection = collection(db, 'Doctors');
       const q = query(usersCollection, where('Email', '==', email));
       const querySnapshot = await getDocs(q);
-
+  
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0];
         const userData = userDoc.data();
-
+  
         if (userData.password === password) {
           setMessage({ text: 'Login successful!', type: 'success' });
           onLogin(email, userDoc.id);
-
+  
+          // Store user data in localStorage
+          localStorage.setItem('userData', JSON.stringify(userData)); // Store entire user data
+  
           if (email === 'admin@gmail.com') {
             setTimeout(() => navigate('/homepage'), 1000);
           } else {
@@ -50,7 +53,7 @@ const LoginPage = ({ onLogin }) => {
       console.error('Error during login:', error);
       setMessage({ text: 'An error occurred during login. Please try again.', type: 'error' });
     }
-  };
+  };  
 
   return (
     <div className="container">

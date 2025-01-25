@@ -4,11 +4,12 @@ import img1 from '../assets/img/dd.jpg';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { app } from "../config/firebase"; // Adjust path if needed
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Signup = () => {
   const [formData, setFormData] = useState({
     fullName: '',
-    email: '',
+    Email: '',
     password: '',
     confirmPassword: '',
   });
@@ -17,6 +18,7 @@ const Signup = () => {
 
   const auth = getAuth(app);
   const db = getFirestore(app);
+  const navigate = useNavigate(); // Initialize navigate hook
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,42 +32,45 @@ const Signup = () => {
     e.preventDefault();
     setError('');
     setSuccess('');
-
-    const { fullName, email, password, confirmPassword, Specialization, rate } = formData;
-
+  
+    const { fullName, Email, password, confirmPassword } = formData;
+  
+    // Normalize email to lowercase
+    const normalizedEmail = Email;
+  
     // Validate passwords match and length
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
-
+  
     if (password.length < 6) {
       setError("Password must be at least 6 characters.");
       return;
     }
-
+  
     try {
       // Create a user with Firebase Authentication
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth,Email, password);
       const user = userCredential.user;
-
+  
       // Save user details to Firestore under /Doctors/
       await setDoc(doc(db, "Doctors", user.uid), {
         fullName: fullName,
-        email: email,
+        Email: Email, // Save the normalized email to Firestore
         password: password, // Store password in Firestore (not recommended for production)
-        Specialization: Specialization, // Use Specialization instead of specialist
-        rate: rate, // Save rate
-        uid: user.uid,
       });
-
+  
       setSuccess("Account created successfully!");
-      console.log("User registered and stored in Firestore:", fullName, email);
-
+      console.log("User registered and stored in Firestore:", fullName, Email);
+  
+      // Redirect to login page after successful signup
+      navigate('/Login'); // Redirect to Login page
+  
       // Clear the form
       setFormData({
         fullName: '',
-        email: '',
+        Email: '',
         password: '',
         confirmPassword: '',
       });
@@ -73,7 +78,7 @@ const Signup = () => {
       setError(error.message);
       console.error("Error creating account:", error);
     }
-  };
+  };  
 
   return (
     <div className="container">
@@ -92,8 +97,8 @@ const Signup = () => {
             required
           />
           <input
-            type="email"
-            name="email"
+            type="Email"
+            name="Email"
             placeholder="Email address"
             value={formData.email}
             onChange={handleInputChange}
